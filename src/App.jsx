@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './App.css'
 import { nanoid } from 'nanoid'
 
@@ -35,6 +35,18 @@ function App() {
   const deleteBook = (id) => {
     setBooks((prev)=> prev.filter((book)=>book.id!==id))
   }
+
+  useEffect(()=>{
+    let fetchedBooks = JSON.parse(localStorage.getItem("books"))
+    if(fetchedBooks.length>0 && fetchedBooks)
+    {
+      setBooks(fetchedBooks)
+    }
+  }, [])
+
+  useEffect(()=>{
+    localStorage.setItem("books", JSON.stringify(books))
+  }, [books])
   return (
     <div className='mx-10 flex flex-col items-center'>
       <div className='w-3/5'>
@@ -85,7 +97,7 @@ function App() {
           <div className=' p-2 text-center border-l border-t border-b border-gray-300'>ISBN#</div>
           <div className=' border-t border-b border-r border-gray-300 p-2 text-center'></div>
         </div>
-        
+
         {
           books.map((book) => (
           <div 
