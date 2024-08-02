@@ -36,17 +36,18 @@ function App() {
     setBooks((prev)=> prev.filter((book)=>book.id!==id))
   }
 
-  useEffect(()=>{
-    let fetchedBooks = JSON.parse(localStorage.getItem("books"))
-    if(fetchedBooks.length>0 && fetchedBooks)
-    {
-      setBooks(fetchedBooks)
-    }
-  }, [])
+  // useEffect(()=>{
+  //   let fetchedBooks = JSON.parse(localStorage.getItem("books"))
+  //   if(fetchedBooks.length>0 && fetchedBooks)
+  //   {
+  //     setBooks(fetchedBooks)
+  //   }
+  // }, [])
 
   useEffect(()=>{
     localStorage.setItem("books", JSON.stringify(books))
   }, [books])
+
   return (
     <div className='mx-10 flex flex-col items-center'>
       <div className='w-3/5'>
